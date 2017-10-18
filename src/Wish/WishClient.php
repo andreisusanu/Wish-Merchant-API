@@ -169,8 +169,13 @@ class WishClient{
     return "success";
   }
 
-  public function updateShippingById($id,$country,$price){
+  public function updateShippingById($id,$country,$price, bool $wishExpress = null){
     $params = array('id'=>$id,'country'=>$country,'price'=>$price);
+
+    if (!is_null($wishExpress)) {
+        $params['wish_express'] = $wishExpress;
+    }
+
     $response = $this->getResponse('POST','product/update-shipping',$params);
     return "success";
   }
