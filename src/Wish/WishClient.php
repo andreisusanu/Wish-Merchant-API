@@ -173,7 +173,7 @@ class WishClient{
     $params = array('id'=>$id,'country'=>$country,'price'=>$price);
 
     if (!is_null($wishExpress)) {
-        $params['wish_express'] = (bool)$wishExpress;
+        $params['wish_express'] = empty($wishExpress) ? 'false' : 'true';
     }
 
     $response = $this->getResponse('POST','product/update-shipping',$params);
