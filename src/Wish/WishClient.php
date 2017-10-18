@@ -169,7 +169,7 @@ class WishClient{
     return "success";
   }
 
-  public function updateShippingById($id,$country,$price, bool $wishExpress = null){
+  public function updateShippingById($id,$country,$price, $wishExpress = null){
     $params = array('id'=>$id,'country'=>$country,'price'=>$price);
 
     if (!is_null($wishExpress)) {
