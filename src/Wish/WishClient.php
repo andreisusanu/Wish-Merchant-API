@@ -423,4 +423,117 @@ class WishClient{
   }
 
 
+    /**
+     * @param string|null $since
+     * @param int|null $limit
+     * @param string|null $sort
+     * @param string|null $warehouse_name
+     * @return mixed
+     */
+  public function productCreateDownloadJob($since = null, $limit = null, $sort = null, $warehouse_name = null)
+  {
+      $params = array();
+
+      if (!is_null($since)) {
+          $params['since'] = $since;
+      }
+
+      if (!is_null($limit)) {
+          $params['limit'] = $limit;
+      }
+
+      if (!is_null($sort)) {
+          $params['sort'] = $sort;
+      }
+
+      if (!is_null($warehouse_name)) {
+          $params['warehouse_name'] = $warehouse_name;
+      }
+
+      $response = $this->getResponse('POST','product/create-download-job', $params);
+      return $response->getData();
+  }
+
+    /**
+     * @param int $id
+     * @return mixed
+     */
+  public function productGetDownloadJobStatus($id)
+  {
+      $params = array();
+      $params['job_id'] = $id;
+
+      $response = $this->getResponse('POST','product/get-download-job-status', $params);
+      return $response->getData();
+  }
+
+    /**
+     * @param int $id
+     * @return mixed
+     */
+  public function productCancelDownloadJob($id)
+  {
+      $params = array();
+      $params['job_id'] = $id;
+
+      $response = $this->getResponse('POST','product/cancel-download-job', $params);
+      return $response->getData();
+  }
+
+    /**
+     * @param string|null $start
+     * @param string|null $end
+     * @param int|null $limit
+     * @param string|null $sort
+     * @return mixed
+     */
+  public function orderCreateDownloadJob($start = null, $end = null, $limit = null, $sort = null)
+  {
+      $params = array();
+
+      if (!is_null($start)) {
+          $params['start'] = $start;
+      }
+
+      if (!is_null($end)) {
+          $params['end'] = $end;
+      }
+
+      if (!is_null($limit)) {
+          $params['limit'] = $limit;
+      }
+
+      if (!is_null($sort)) {
+          $params['sort'] = $sort;
+      }
+
+      $response = $this->getResponse('POST','order/create-download-job', $params);
+      return $response->getData();
+  }
+
+    /**
+     * @param int $id
+     * @return mixed
+     */
+  public function orderGetDownloadJobStatus($id)
+  {
+      $params = array();
+      $params['job_id'] = $id;
+
+      $response = $this->getResponse('POST','order/get-download-job-status', $params);
+      return $response->getData();
+  }
+
+    /**
+     * @param int $id
+     * @return mixed
+     */
+  public function orderCancelDownloadJob($id)
+  {
+      $params = array();
+      $params['job_id'] = $id;
+
+      $response = $this->getResponse('POST','order/cancel-download-job', $params);
+      return $response->getData();
+  }
 }
