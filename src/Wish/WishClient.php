@@ -169,8 +169,8 @@ class WishClient{
     return "success";
   }
 
-  public function updateShippingById($id,$country,$price, $wishExpress = null){
-    $params = array('id'=>$id,'country'=>$country,'price'=>$price);
+  public function updateShippingById($id,$country,$price, $wishExpress = null, $useProductShipping = false){
+    $params = array('id'=>$id,'country'=>$country,'price'=>$price, 'use_product_shipping' => $useProductShipping);
 
     if (!is_null($wishExpress)) {
         $params['wish_express'] = empty($wishExpress) ? 'false' : 'true';
