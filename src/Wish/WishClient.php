@@ -109,6 +109,12 @@ class WishClient{
     return new WishProduct($response->getData());
   }
 
+  public function getProductByParentSku($parentSku){
+    $params = array('parent_sku'=>$parentSku);
+    $response = $this->getResponse('GET','product',$params);
+    return new WishProduct($response->getData());
+  }
+
   public function createProduct($object){
     $response = $this->getResponse('POST','product/add',$object);
     return new WishProduct($response->getData());
