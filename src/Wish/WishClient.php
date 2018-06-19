@@ -291,10 +291,13 @@ class WishClient{
       $params);
   }
 
-  public function getAllUnfulfilledOrdersSince($time=null){
+  public function getAllUnfulfilledOrdersSince($time=null, $limit=null){
     $params = array();
     if($time){
       $params['since']=$time;
+    }
+    if ($limit) {
+        $params['limit']=$limit;
     }
     return $this->getResponseIter(
       'GET',
