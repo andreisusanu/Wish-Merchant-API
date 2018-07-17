@@ -87,8 +87,12 @@ class WishClient{
     do{
       $params['start']=$start;
       $response = $this->getResponse($method,$uri,$params);
-      foreach($response->getData() as $class_raw){
-        $class_arr[] = new $getClass($class_raw);
+
+      $responseData = $response->getData();
+      if (!empty($responseData)){
+          foreach($responseData as $class_raw){
+              $class_arr[] = new $getClass($class_raw);
+          }
       }
       $start += static::LIMIT;
     }while($response->hasMore());
