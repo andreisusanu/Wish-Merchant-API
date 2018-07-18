@@ -192,6 +192,62 @@ class WishClient{
     return "success";
   }
 
+    /**
+     *
+     * @comment $countryPriceList example: ['US' => 10.99, 'UK' => 9.99]
+     * @comment $useProductShippingCountries will override the set shipping value for the country if both are provided
+     *
+     * @param $id
+     * @param array $countryPriceList
+     * @param array $useProductShippingCountries
+     * @param array $disabledCountries
+     * @param array $wishExpressAddCountries
+     * @param array $wishExpressRemoveCountries
+     * @param null $warehouseName
+     * @return string
+     *
+     */
+  public function updateMultiShippingById(
+      $id,
+      $countryPriceList = [],
+      $useProductShippingCountries=[],
+      $disabledCountries=[],
+      $wishExpressAddCountries=[],
+      $wishExpressRemoveCountries=[],
+      $warehouseName=null
+  ){
+      $params = array('id'=>$id);
+
+      if (!empty($countryPriceList)){
+          foreach ($countryPriceList as $countryCode => $shippingValue){
+              $params[$countryCode] = $shippingValue;
+          }
+      }
+
+      if (!empty($useProductShippingCountries)){
+          $params['use_product_shipping_countries'] = implode(',', $useProductShippingCountries);
+      }
+
+      if (!empty($disabledCountries)){
+          $params['disabled_countries'] = implode(',', $disabledCountries);
+      }
+
+      if (!empty($wishExpressAddCountries)){
+          $params['wish_express_add_countries'] = implode(',', $wishExpressAddCountries);
+      }
+
+      if (!empty($wishExpressRemoveCountries)){
+          $params['wish_express_remove_countries'] = implode(',', $wishExpressRemoveCountries);
+      }
+
+      if (!empty($warehouseName)){
+          $params['warehouse_name'] = $warehouseName;
+      }
+
+      $response = $this->getResponse('POST','product/update-multi-shipping', $params);
+      return "success";
+  }
+
   public function getShippingById($id,$country){
     $params = array('id'=>$id,'country'=>$country);
     $response = $this->getResponse(
