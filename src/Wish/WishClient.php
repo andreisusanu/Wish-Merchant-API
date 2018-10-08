@@ -283,7 +283,6 @@ class WishClient{
         'sku',
         'inventory',
         'price',
-        'shipping',
         'enabled',
         'size',
         'color',
