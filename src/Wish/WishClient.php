@@ -204,8 +204,10 @@ class WishClient{
      * @param array $wishExpressAddCountries
      * @param array $wishExpressRemoveCountries
      * @param null $warehouseName
+     * @param null $defaultShippingPrice
      * @return string
      *
+     * @see https://merchant.wish.com/documentation/api/v2#update-multi-shipping
      */
   public function updateMultiShippingById(
       $id,
@@ -214,7 +216,8 @@ class WishClient{
       $disabledCountries=[],
       $wishExpressAddCountries=[],
       $wishExpressRemoveCountries=[],
-      $warehouseName=null
+      $warehouseName=null,
+      $defaultShippingPrice=null
   ){
       $params = array('id'=>$id);
 
@@ -242,6 +245,10 @@ class WishClient{
 
       if (!empty($warehouseName)){
           $params['warehouse_name'] = $warehouseName;
+      }
+
+      if (!is_null($defaultShippingPrice)) {
+          $params['use_product_shipping_countries'] = $defaultShippingPrice;
       }
 
       $response = $this->getResponse('POST','product/update-multi-shipping', $params);
