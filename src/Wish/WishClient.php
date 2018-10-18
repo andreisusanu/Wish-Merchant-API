@@ -248,7 +248,7 @@ class WishClient{
       }
 
       if (!is_null($defaultShippingPrice)) {
-          $params['use_product_shipping_countries'] = $defaultShippingPrice;
+          $params['default_shipping_price'] = $defaultShippingPrice;
       }
 
       $response = $this->getResponse('POST','product/update-multi-shipping', $params);
