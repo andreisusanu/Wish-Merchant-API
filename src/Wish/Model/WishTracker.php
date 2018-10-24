@@ -30,12 +30,12 @@ class WishTracker{
     if($tracking_number)$this->tracking_number = $tracking_number;
     if($ship_note)$this->ship_note = $ship_note;
     if($origin_country_code)$this->origin_country_code = $origin_country_code;
-    
+
 
   }
 
    public function getParams(){
-    $keys = array('tracking_provider','tracking_number','ship_note');
+    $keys = array('tracking_provider','tracking_number','ship_note','origin_country_code');
     $params = array();
     foreach($keys as $key){
       if(isset($this->$key)){
