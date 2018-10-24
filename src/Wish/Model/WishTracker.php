@@ -22,12 +22,14 @@ class WishTracker{
   private $tracking_provider;
   private $tracking_number;
   private $ship_note;
+  private $origin_country_code;
 
-  public function __construct($tracking_provider,$tracking_number=null,$ship_note=null){
+  public function __construct($tracking_provider,$tracking_number=null,$ship_note=null,$origin_country_code=null){
 
     $this->tracking_provider = $tracking_provider;
     if($tracking_number)$this->tracking_number = $tracking_number;
     if($ship_note)$this->ship_note = $ship_note;
+    if($origin_country_code)$this->origin_country_code = $origin_country_code;
     
 
   }
