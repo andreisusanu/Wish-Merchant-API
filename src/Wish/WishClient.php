@@ -179,14 +179,12 @@ class WishClient{
     return "success";
   }
 
-  public function updateShippingById($id,$country,$price, $wishExpress = null, $useProductShipping = false){
+  public function updateShippingById($id,$country,$price, $wishExpress = null){
     $params = array('id'=>$id,'country'=>$country,'price'=>$price);
 
     if (!is_null($wishExpress)) {
         $params['wish_express'] = empty($wishExpress) ? 'false' : 'true';
     }
-
-    $params['use_product_shipping'] = empty($useProductShipping) ? 'false' : 'true';
 
     $response = $this->getResponse('POST','product/update-shipping',$params);
     return "success";
@@ -195,11 +193,9 @@ class WishClient{
     /**
      *
      * @comment $countryPriceList example: ['US' => 10.99, 'UK' => 9.99]
-     * @comment $useProductShippingCountries will override the set shipping value for the country if both are provided
      *
      * @param $id
      * @param array $countryPriceList
-     * @param array $useProductShippingCountries
      * @param array $disabledCountries
      * @param array $wishExpressAddCountries
      * @param array $wishExpressRemoveCountries
@@ -212,7 +208,6 @@ class WishClient{
   public function updateMultiShippingById(
       $id,
       $countryPriceList = [],
-      $useProductShippingCountries=[],
       $disabledCountries=[],
       $wishExpressAddCountries=[],
       $wishExpressRemoveCountries=[],
@@ -225,10 +220,6 @@ class WishClient{
           foreach ($countryPriceList as $countryCode => $shippingValue){
               $params[$countryCode] = $shippingValue;
           }
-      }
-
-      if (!empty($useProductShippingCountries)){
-          $params['use_product_shipping_countries'] = implode(',', $useProductShippingCountries);
       }
 
       if (!empty($disabledCountries)){
